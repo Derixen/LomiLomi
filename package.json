@@ -1,5 +1,5 @@
 {
-  "name": "jjimdev",
+  "name": "lomilomi",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -7,15 +7,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Derixen/JJimDev.git"
+    "url": "git+https://github.com/Derixen/LomiLomi.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Derixen/JJimDev/issues"
+    "url": "https://github.com/Derixen/LomiLomi/issues"
   },
-  "homepage": "https://github.com/Derixen/JJimDev#readme",
+  "homepage": "https://github.com/Derixen/LomiLomi#readme",
   "description": "",
   "devDependencies": {
     "tailwindcss": "^4.3.0"
