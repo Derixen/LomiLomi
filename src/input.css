@@ -1,0 +1,261 @@
+@import "tailwindcss";
+@source "../index.html";
+
+/* --- 1. Global Reset & Body Styling --- */
+body {
+  background-color: #f5f6fa;
+  @apply min-h-screen flex items-start justify-center pt-8 font-sans antialiased;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+/* --- 2. Typography Overrides --- */
+h1 {
+  @apply text-3xl font-extrabold tracking-tight text-slate-600;
+}
+h2 {
+  @apply text-2xl font-extrabold tracking-tight text-slate-500;
+}
+h3 {
+  @apply text-xl font-extrabold tracking-tight text-slate-500;
+}
+p {
+  @apply text-sm md:text-base leading-relaxed antialiased text-slate-500;
+}
+
+/* --- 3. Custom Card Components --- */
+.card-container {
+  @apply bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 p-4
+         transition-all duration-200 cursor-pointer
+         hover:bg-[#ebf5ff] hover:border-[#b3d7f5] hover:-translate-y-0.5 hover:shadow-xs;
+}
+
+.header-card {
+  @apply bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 p-6 shadow-2xs w-full flex items-center justify-between gap-4;
+}
+
+.sub-header-card {
+  @apply bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-sm transition-all duration-200 p-4 text-center;
+}
+
+.sidebar-card {
+  @apply bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-sm transition-all duration-200 p-6;
+}
+
+.content-card {
+  @apply bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-sm transition-all duration-200 p-6 text-slate-200;
+}
+
+/* --- 4. Content Elements --- */
+.site-title {
+  @apply text-4xl font-extrabold text-[#0B192C] tracking-tight;
+}
+
+.site-subheading {
+  @apply text-base text-slate-600 tracking-wide mt-0.5;
+}
+
+.site-desc {
+  @apply text-base md:text-lg tracking-wide text-slate-700 mt-0.5;
+}
+
+.content-title {
+  @apply text-xl font-bold text-white border-b border-slate-700 pb-2 mb-2;
+}
+
+.content-body {
+  @apply text-slate-600 mt-2 leading-relaxed;
+}
+
+.sidebar-menu {
+  @apply flex flex-col gap-4 w-full;
+}
+
+/* --- 5. Button Components --- */
+.btn-jim {
+  @apply w-full py-2.5 px-4 rounded-xl text-sm font-semibold 
+         flex items-center justify-start gap-2.5 
+         transition-all duration-200 cursor-pointer 
+         focus:outline-none active:scale-[0.98];
+}
+
+.btn-jim-slate {
+  @apply text-slate-700 bg-transparent 
+         hover:bg-[#e8f2fc] hover:text-[#0066b2] 
+         border border-transparent hover:border-[#b3d7f5];
+}
+
+.btn-jim-active {
+  @apply bg-[#ebf5ff] text-[#0066b2] border border-[#b3d7f5] shadow-xs;
+}
+
+.btn-jim-sky {
+  @apply bg-sky-600 text-white border border-sky-500 
+         shadow-md shadow-sky-500/25 
+         hover:bg-sky-500 hover:-translate-y-0.5;
+}
+
+/* --- Quote Box Components --- */
+.quote-card {
+  @apply p-5 text-center flex items-center justify-center 
+         rounded-2xl border border-slate-200/90 shadow-sm 
+         border-l-4 border-l-sky-500 bg-white/90 backdrop-blur-md;
+}
+
+.quote-text {
+  @apply text-base md:text-lg font-medium italic text-slate-700 
+         tracking-wide max-w-3xl leading-relaxed;
+}
+
+.quote-text::before {
+  content: "“";
+  @apply text-sky-500 font-serif font-bold text-xl mr-1;
+}
+
+.quote-text::after {
+  content: "”";
+  @apply text-sky-500 font-serif font-bold text-xl ml-1;
+}
+
+/* Statistics Popup */
+#stat-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+
+#stat-modal-panel {
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+#stat-modal-sections {
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* Ensure popup controls receive mouse clicks */
+#stat-modal {
+  pointer-events: auto;
+}
+
+#stat-modal-backdrop {
+  pointer-events: auto;
+}
+
+#stat-modal-panel {
+  pointer-events: auto;
+}
+
+#stat-modal-close,
+#stat-modal-footer-close {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+#stat-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: auto;
+}
+
+#stat-modal-panel {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+#stat-modal-close,
+#stat-modal-footer-close {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* ==========================================
+   Expandable Project Cards
+   ========================================== */
+
+/* Smooth interaction feedback */
+#site-subdescription article {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#site-subdescription article:hover {
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+/* Prevent images from exceeding the card */
+#site-subdescription article img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Improve expanded content readability */
+#site-subdescription article li {
+  margin-bottom: 0.5rem;
+}
+
+/* Better spacing for paragraphs */
+#site-subdescription article p + p {
+  margin-top: 0.75rem;
+}
+
+/* Statistics popup backdrop */
+#stat-modal-backdrop {
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  background-color: rgba(2, 6, 23, 0);
+
+  transition:
+    backdrop-filter 350ms ease-in-out,
+    -webkit-backdrop-filter 350ms ease-in-out,
+    background-color 350ms ease-in-out;
+}
+
+/* Activated when popup opens */
+#stat-modal.backdrop-visible #stat-modal-backdrop {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(2, 6, 23, 0.65);
+}
+
+/* ==========================================
+   Personal Profile Modal
+   ========================================== */
+
+#profile-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(2, 6, 23, 0);
+
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+
+  transition:
+    backdrop-filter 350ms ease-in-out,
+    -webkit-backdrop-filter 350ms ease-in-out,
+    background-color 350ms ease-in-out;
+}
+
+#profile-modal.profile-visible #profile-modal-backdrop {
+  background-color: rgba(2, 6, 23, 0.65);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+#profile-modal-panel {
+  position: relative;
+  z-index: 10;
+}
