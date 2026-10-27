@@ -1,261 +1,276 @@
-@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+
+@import "tailwindcss" important;
+
 @source "../index.html";
+@source "../main.js";
+@source "../data.json";
 
-/* --- 1. Global Reset & Body Styling --- */
+/* ==========================================================================
+   1. ITT MÓDOSÍTHATOD A 4 FŐ SZÍNT ÉS A BETŰKET (EGY HELYEN)
+   ========================================================================== */
+:root {
+  /* --- A 4 FŐ PALETTA SZÍN (Írd át a HEX kódokat, ha új palettád van) --- */
+  --color-bg: #f0e2d0; /* 1. Háttérszín (Background Color) */
+  --color-card: #f3ebe0; /* 2. Kártya háttérszín (Card Color) */
+  --color-button: #d1bfa6; /* 3. Gomb szín (Button Color) */
+  --color-border: #d1c5b5; /* 4. Keret szín (Border Color) */
+
+  /* --- KÁRTYA ÁRNYÉK BEÁLLÍTÁS --- */
+  /* Lágy, elegáns árnyék (offset-x offset-y blur spread color) */
+  --card-shadow:
+    0 10px 25px -5px rgba(70, 75, 113, 0.12),
+    0 8px 10px -6px rgba(70, 75, 113, 0.08);
+
+  /* Kiegészítő szövegszínek (A paletta sötét/világos árnyalataihoz) */
+  --color-text-main: #464b71;
+  --color-text-accent: #6a709e;
+
+  /* --- BETŰTÍPUS BEÁLLÍTÁSOK --- */
+  --font-heading: "Tangerine", cursive, serif; /* Címsorok betűtípusa */
+  --font-body: "Plus Jakarta Sans", sans-serif; /* Sima szöveg betűtípusa */
+
+  --heading-weight: 700; /* Címsor vastagsága (400 = normál, 700 = félkövér) */
+  --heading-size: 2.2rem; /* Címsorok mérete */
+}
+
+/* ==========================================================================
+   2. GLOBAL BASE STYLES (Automatikus hozzárendelések)
+   ========================================================================== */
 body {
-  background-color: #f5f6fa;
-  @apply min-h-screen flex items-start justify-center pt-8 font-sans antialiased;
+  font-family: var(--font-body);
+  background-color: var(--color-bg) !important;
+  color: var(--color-text-main);
+  padding-bottom: 7rem;
 }
 
-html {
-  scrollbar-gutter: stable;
+/* Egyedi Címsor Osztály */
+.font-serif-custom {
+  font-family: var(--font-heading) !important;
+  font-weight: var(--heading-weight) !important;
+  font-size: var(--heading-size) !important;
+  line-height: 1.1;
 }
 
-/* --- 2. Typography Overrides --- */
-h1 {
-  @apply text-3xl font-extrabold tracking-tight text-slate-600;
-}
-h2 {
-  @apply text-2xl font-extrabold tracking-tight text-slate-500;
-}
-h3 {
-  @apply text-xl font-extrabold tracking-tight text-slate-500;
-}
-p {
-  @apply text-sm md:text-base leading-relaxed antialiased text-slate-500;
+/* Alapértelmezett kártya stílus (hover effekt NÉLKÜL) */
+.card-soft {
+  background-color: var(--color-card) !important;
+  border: 1px solid var(--color-border) !important;
+  box-shadow: var(--card-shadow) !important;
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
-/* --- 3. Custom Card Components --- */
-.card-container {
-  @apply bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 p-4
-         transition-all duration-200 cursor-pointer
-         hover:bg-[#ebf5ff] hover:border-[#b3d7f5] hover:-translate-y-0.5 hover:shadow-xs;
-}
-
-.header-card {
-  @apply bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 p-6 shadow-2xs w-full flex items-center justify-between gap-4;
-}
-
-.sub-header-card {
-  @apply bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-sm transition-all duration-200 p-4 text-center;
-}
-
-.sidebar-card {
-  @apply bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-sm transition-all duration-200 p-6;
-}
-
-.content-card {
-  @apply bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-sm transition-all duration-200 p-6 text-slate-200;
-}
-
-/* --- 4. Content Elements --- */
-.site-title {
-  @apply text-4xl font-extrabold text-[#0B192C] tracking-tight;
-}
-
-.site-subheading {
-  @apply text-base text-slate-600 tracking-wide mt-0.5;
-}
-
-.site-desc {
-  @apply text-base md:text-lg tracking-wide text-slate-700 mt-0.5;
-}
-
-.content-title {
-  @apply text-xl font-bold text-white border-b border-slate-700 pb-2 mb-2;
-}
-
-.content-body {
-  @apply text-slate-600 mt-2 leading-relaxed;
-}
-
-.sidebar-menu {
-  @apply flex flex-col gap-4 w-full;
-}
-
-/* --- 5. Button Components --- */
-.btn-jim {
-  @apply w-full py-2.5 px-4 rounded-xl text-sm font-semibold 
-         flex items-center justify-start gap-2.5 
-         transition-all duration-200 cursor-pointer 
-         focus:outline-none active:scale-[0.98];
-}
-
-.btn-jim-slate {
-  @apply text-slate-700 bg-transparent 
-         hover:bg-[#e8f2fc] hover:text-[#0066b2] 
-         border border-transparent hover:border-[#b3d7f5];
-}
-
-.btn-jim-active {
-  @apply bg-[#ebf5ff] text-[#0066b2] border border-[#b3d7f5] shadow-xs;
-}
-
-.btn-jim-sky {
-  @apply bg-sky-600 text-white border border-sky-500 
-         shadow-md shadow-sky-500/25 
-         hover:bg-sky-500 hover:-translate-y-0.5;
-}
-
-/* --- Quote Box Components --- */
-.quote-card {
-  @apply p-5 text-center flex items-center justify-center 
-         rounded-2xl border border-slate-200/90 shadow-sm 
-         border-l-4 border-l-sky-500 bg-white/90 backdrop-blur-md;
-}
-
-.quote-text {
-  @apply text-base md:text-lg font-medium italic text-slate-700 
-         tracking-wide max-w-3xl leading-relaxed;
-}
-
-.quote-text::before {
-  content: "“";
-  @apply text-sky-500 font-serif font-bold text-xl mr-1;
-}
-
-.quote-text::after {
-  content: "”";
-  @apply text-sky-500 font-serif font-bold text-xl ml-1;
-}
-
-/* Statistics Popup */
-#stat-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-}
-
-#stat-modal-panel {
-  max-height: 90vh;
-  overflow: hidden;
-}
-
-#stat-modal-sections {
-  overflow-y: auto;
-  min-height: 0;
-}
-
-/* Ensure popup controls receive mouse clicks */
-#stat-modal {
-  pointer-events: auto;
-}
-
-#stat-modal-backdrop {
-  pointer-events: auto;
-}
-
-#stat-modal-panel {
-  pointer-events: auto;
-}
-
-#stat-modal-close,
-#stat-modal-footer-close {
-  position: relative;
-  z-index: 20;
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-#stat-modal-backdrop {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: auto;
-}
-
-#stat-modal-panel {
-  position: relative;
-  z-index: 10;
-  pointer-events: auto;
-}
-
-#stat-modal-close,
-#stat-modal-footer-close {
-  position: relative;
-  z-index: 20;
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-/* ==========================================
-   Expandable Project Cards
-   ========================================== */
-
-/* Smooth interaction feedback */
-#site-subdescription article {
+/* Speciális hover osztály — csak azok emelkednek ki, amik megkapják ezt az osztályt */
+.card-hover {
   transition:
-    border-color 0.2s ease,
+    transform 0.2s ease,
     box-shadow 0.2s ease;
 }
 
-#site-subdescription article:hover {
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -5px rgba(70, 75, 113, 0.18) !important;
 }
 
-/* Prevent images from exceeding the card */
-#site-subdescription article img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Improve expanded content readability */
-#site-subdescription article li {
-  margin-bottom: 0.5rem;
-}
-
-/* Better spacing for paragraphs */
-#site-subdescription article p + p {
-  margin-top: 0.75rem;
-}
-
-/* Statistics popup backdrop */
-#stat-modal-backdrop {
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  background-color: rgba(2, 6, 23, 0);
-
+/* Smooth & Slower Expand/Collapse Animation */
+.expandable-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-top: 0;
   transition:
-    backdrop-filter 350ms ease-in-out,
-    -webkit-backdrop-filter 350ms ease-in-out,
-    background-color 350ms ease-in-out;
+    max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.6s ease-in-out,
+    padding-top 0.5s ease-in-out;
 }
 
-/* Activated when popup opens */
-#stat-modal.backdrop-visible #stat-modal-backdrop {
+.expandable-content.expanded {
+  max-height: 500px;
+  opacity: 1;
+  padding-top: 0.5rem;
+}
+
+/* Slower Arrow Rotation */
+.toggle-arrow {
+  display: inline-block;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+/* Gombok Stílusa (Audio gomb, Akció gombok) */
+.btn-primary {
+  background-color: var(--color-button) !important;
+  color: #ffffff !important;
+  border-radius: 9999px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
+/* Ikon dobozok / Jelvények kerete */
+.border-custom {
+  border-color: var(--color-border) !important;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background-color: rgba(2, 6, 23, 0.65);
+  border-top: 1px solid var(--color-border);
+  padding: 0.625rem 1.5rem;
+  z-index: 50;
 }
 
-/* ==========================================
-   Personal Profile Modal
-   ========================================== */
-
-#profile-modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(2, 6, 23, 0);
-
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-
-  transition:
-    backdrop-filter 350ms ease-in-out,
-    -webkit-backdrop-filter 350ms ease-in-out,
-    background-color 350ms ease-in-out;
-}
-
-#profile-modal.profile-visible #profile-modal-backdrop {
-  background-color: rgba(2, 6, 23, 0.65);
-
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-#profile-modal-panel {
+/* Header Avatar */
+.header-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
   position: relative;
   z-index: 10;
+}
+
+.header-avatar img {
+  transition:
+    transform 0.25s ease-in-out,
+    box-shadow 0.25s ease-in-out;
+  border-radius: 9999px;
+}
+
+.header-avatar:hover img {
+  transform: scale(2.2);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+}
+
+.badge-glass {
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 10px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Carousel Image Fade Animation */
+.carousel-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.carousel-img.active {
+  opacity: 1;
+}
+
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.carousel-dot.active {
+  width: 18px;
+  background-color: var(--color-border);
+}
+
+/* Szirmok */
+#petal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 40;
+}
+
+.petal {
+  position: absolute;
+  top: -10%;
+  user-select: none;
+  pointer-events: none;
+  animation-name: fall, sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+  animation-direction: normal, alternate;
+}
+
+@keyframes fall {
+  0% {
+    top: -10%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    top: 105%;
+    opacity: 0;
+  }
+}
+
+@keyframes sway {
+  0% {
+    transform: translateX(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateX(50px) rotate(180deg);
+  }
+  100% {
+    transform: translateX(-50px) rotate(360deg);
+  }
+}
+
+/* Profile modal styling */
+#profile-modal .card-soft {
+  background-color: var(--color-card) !important;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 30rem;
+}
+
+/* Profile description */
+#profile-about-quote {
+  background-color: #e8dfd4;
+  border: none !important;
+  border-radius: 1rem;
+  padding: 1rem;
+  line-height: 1.7;
+}
+
+/* Profile avatar */
+#profile-avatar {
+  width: 4rem;
+  height: 4rem;
+  flex-shrink: 0;
+}
+
+/* Profile title */
+#profile-name {
+  font-size: 2.2rem !important;
 }

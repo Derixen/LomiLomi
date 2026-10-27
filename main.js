@@ -95,13 +95,13 @@ function initPetalEffect() {
 
 // Hero Carousel Beállítása (Ellenőrizd a .jpg / .png kiterjesztést!)
 const heroImages = [
-  "Template/background01.jif",
-  "Template/background02.jif",
-  "Template/background03.jif",
-  "Template/background04.jif",
-  "Template/background05.jif",
-  "Template/background06.jif",
-  "Template/background07.jif",
+  "./images/background01.jif",
+  "./images/background02.jif",
+  "./images/background03.jif",
+  "./images/background04.jif",
+  "./images/background05.jif",
+  "./images/background06.jif",
+  "./images/background07.jif",
 ];
 
 let currentImageIndex = 0;
@@ -416,7 +416,12 @@ function populateProfile(profileSection) {
 // Fő indító függvény
 async function loadTemplateData() {
   try {
-    const response = await fetch("template.json");
+    const response = await fetch("./data.json");
+
+    if (!response.ok) {
+      throw new Error(`Failed to load data.json: ${response.status}`);
+    }
+
     const data = await response.json();
 
     populateHeaderAndHero(data);
