@@ -17,11 +17,8 @@
   },
   "homepage": "https://github.com/Derixen/LomiLomi#readme",
   "description": "",
-  "devDependencies": {
-    "tailwindcss": "^4.3.0"
-  },
   "type": "commonjs",
-  "dependencies": {
-    "@tailwindcss/cli": "^4.3.0"
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
   }
 }
